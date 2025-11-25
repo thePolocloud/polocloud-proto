@@ -3,7 +3,7 @@ import com.google.protobuf.gradle.*
 plugins {
     id("java-library")
     id("com.google.protobuf") version "0.9.5"
-    id("com.gradleup.shadow") version "9.0.0"
+    id("com.gradleup.shadow") version "9.2.0"
     `maven-publish`
 }
 
