@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "dev.httpmarco.polocloud.proto"
-version = "1.0"
+version = "3.0.0-pre.7-SNAPSHOT"
 
 
 val grpcVersion = "1.77.0"
@@ -14,8 +14,6 @@ val protobufVersion = "4.28.0"
 
 repositories {
     mavenCentral()
-
-    maven("https://packages.confluent.io/maven/")
 }
 
 dependencies {
