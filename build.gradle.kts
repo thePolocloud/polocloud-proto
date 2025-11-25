@@ -58,7 +58,7 @@ tasks.jar {
     enabled = false
 }
 
-tasks.jar {
+tasks.shadowJar {
     archiveFileName.set("polocloud-proto-$version.jar")
 }
 
