@@ -3,6 +3,8 @@ import com.google.protobuf.gradle.*
 plugins {
     id("java-library")
     id("com.google.protobuf") version "0.9.5"
+    id("com.gradleup.shadow") version "9.0.0"
+
     alias(libs.plugins.nexus.publish)
     `maven-publish`
 }
@@ -51,9 +53,17 @@ protobuf {
     }
 }
 
+tasks.jar {
+    dependsOn(tasks.shadowJar)
+    enabled = false
+}
 
 tasks.jar {
     archiveFileName.set("polocloud-proto-$version.jar")
+}
+
+artifacts {
+    archives(tasks.shadowJar)
 }
 
 tasks {
