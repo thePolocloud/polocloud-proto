@@ -36,7 +36,7 @@ java {
 }
 
 tasks.withType<JavaCompile>().configureEach {
-    sourceCompatibility = "21"shad
+    sourceCompatibility = "21"
     targetCompatibility = "21"
     options.encoding = "UTF-8"
 }
