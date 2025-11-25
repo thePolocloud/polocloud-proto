@@ -7,7 +7,7 @@ plugins {
     `maven-publish`
 }
 
-group = "dev.httpmarco.polocloud.proto"
+group = "dev.httpmarco.polocloud"
 version = "3.0.0-pre.7-SNAPSHOT"
 
 
