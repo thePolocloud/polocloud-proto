@@ -8,8 +8,7 @@ plugins {
 }
 
 group = "dev.httpmarco.polocloud"
-version = "3.0.0-pre.7-SNAPSHOT"
-
+version = "3.0.0-pre.7.1-SNAPSHOT"
 
 val grpcVersion = "1.77.0"
 val protobufVersion = "4.33.1"
@@ -19,20 +18,42 @@ repositories {
 }
 
 dependencies {
-    api("com.google.protobuf:protobuf-java:${protobufVersion}")
-    api("com.google.protobuf:protobuf-java-util:${protobufVersion}")
-    api("io.grpc:grpc-netty:${grpcVersion}")
-    api("io.grpc:grpc-stub:${grpcVersion}")
-    api("io.grpc:grpc-services:${grpcVersion}")
-    api("io.grpc:grpc-protobuf:${grpcVersion}")
+    api("com.google.protobuf:protobuf-java:$protobufVersion")
+    api("com.google.protobuf:protobuf-java-util:$protobufVersion")
 
+    api("io.grpc:grpc-netty:$grpcVersion")
+    api("io.grpc:grpc-stub:$grpcVersion")
+    api("io.grpc:grpc-services:$grpcVersion")
+    api("io.grpc:grpc-protobuf:$grpcVersion")
+
+    // Compile only annotation API
     compileOnly("javax.annotation:javax.annotation-api:1.3.2")
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+    withSourcesJar()
+}
+
 tasks.withType<JavaCompile>().configureEach {
-    sourceCompatibility = JavaVersion.VERSION_21.toString()
-    targetCompatibility = JavaVersion.VERSION_21.toString()
+    sourceCompatibility = "21"
+    targetCompatibility = "21"
     options.encoding = "UTF-8"
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir("src/proto")
+        }
+
+        java {
+            srcDir("$buildDir/generated/source/proto/main/java")
+            srcDir("$buildDir/generated/source/proto/main/grpc")
+        }
+    }
 }
 
 protobuf {
@@ -45,64 +66,38 @@ protobuf {
         }
     }
     generateProtoTasks {
-        all().forEach {
-            it.plugins {
-                id("grpc") {}
+        all().forEach { task ->
+            task.plugins {
+                id("grpc")
             }
         }
     }
 }
 
 tasks.shadowJar {
-    archiveFileName.set("polocloud-proto-$version.jar")
+    archiveBaseName.set("polocloud-proto")
+    archiveClassifier.set("")
+    mergeServiceFiles()
 }
 
-artifacts {
-    archives(tasks.shadowJar)
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-
-    withSourcesJar()
-}
-
-tasks {
-    withType<Jar> { duplicatesStrategy = DuplicatesStrategy.EXCLUDE }
-    test {
-        useJUnitPlatform()
-    }
-}
-
-sourceSets {
-    main {
-        java {
-            srcDirs("build/generated/source/proto/main/grpc")
-            srcDirs("build/generated/source/proto/main/java")
-        }
-
-        proto {
-            srcDir("src/proto")
-        }
-    }
+tasks.publish {
+    dependsOn(tasks.shadowJar)
 }
 
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
 
-            // nur die Shadow Jar veröffentlichen
             artifact(tasks.shadowJar.get())
 
             pom {
-                name.set(project.name)
+                name.set("polocloud-proto")
+                description.set("PoloCloud gRPC API with bundled dependencies")
                 url.set("https://github.com/thePolocloud/polocloud")
-                description.set("PoloCloud is the simplest and easiest Cloud for Minecraft")
+
                 licenses {
                     license {
-                        name.set("Apache License")
+                        name.set("Apache License 2.0")
                         url.set("https://www.apache.org/licenses/LICENSE-2.0")
                     }
                 }
@@ -114,13 +109,10 @@ publishing {
                 }
                 scm {
                     url.set("https://github.com/thePolocloud/polocloud")
-                    connection.set("https://github.com/httpmarco/polocloud.git")
+                    connection.set("scm:git:https://github.com/thePolocloud/polocloud.git")
+                    developerConnection.set("scm:git:https://github.com/thePolocloud/polocloud.git")
                 }
             }
         }
     }
-}
-
-tasks.publish {
-    dependsOn(tasks.shadowJar)
 }
