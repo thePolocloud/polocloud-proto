@@ -21,11 +21,7 @@ repositories {
 
 dependencies {
     api("com.google.protobuf:protobuf-java:$protobufVersion")
-    api("com.google.protobuf:protobuf-java-util:$protobufVersion")
-
-    api("io.grpc:grpc-netty:$grpcVersion")
     api("io.grpc:grpc-stub:$grpcVersion")
-    api("io.grpc:grpc-services:$grpcVersion")
     api("io.grpc:grpc-protobuf:$grpcVersion")
 
     // Compile only annotation API
@@ -40,7 +36,7 @@ java {
 }
 
 tasks.withType<JavaCompile>().configureEach {
-    sourceCompatibility = "21"
+    sourceCompatibility = "21"shad
     targetCompatibility = "21"
     options.encoding = "UTF-8"
 }
@@ -78,8 +74,6 @@ protobuf {
 
 tasks.shadowJar {
     relocate("com.google.protobuf", "dev.httpmarco.polocloud.sdk.java.relocated.protobuf")
-    relocate("io.grpc", "dev.httpmarco.polocloud.sdk.java.relocated.grpc")
-
 
     archiveBaseName.set("polocloud-proto")
     archiveClassifier.set(null as String?)
