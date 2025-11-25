@@ -25,6 +25,7 @@ dependencies {
     api("com.google.protobuf:protobuf-java-util:${protobufVersion}")
     api("io.grpc:grpc-netty:${grpcVersion}")
     api("io.grpc:grpc-stub:${grpcVersion}")
+    api("io.grpc:grpc-services:${grpcVersion}")
     api("io.grpc:grpc-protobuf:${grpcVersion}")
 
     compileOnly("javax.annotation:javax.annotation-api:1.3.2")
