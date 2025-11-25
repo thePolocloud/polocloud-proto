@@ -5,8 +5,8 @@ package dev.httpmarco.polocloud.v1.proto;
 option java_package = "dev.httpmarco.polocloud.v1.groups";
 option java_multiple_files = true;
 
-import "polocloud/v1/proto/object_utils.proto";
-import "polocloud/v1/proto/template_provider.proto";
+import "v1/object_utils.proto";
+import "v1/template_provider.proto";
 import "google/protobuf/struct.proto";
 
 service GroupController {

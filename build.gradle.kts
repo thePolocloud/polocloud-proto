@@ -3,6 +3,8 @@ import com.google.protobuf.gradle.*
 plugins {
     id("java-library")
     id("com.google.protobuf") version "0.9.5"
+    alias(libs.plugins.nexus.publish)
+    `maven-publish`
 }
 
 group = "dev.httpmarco.polocloud.proto"
@@ -72,4 +74,50 @@ sourceSets {
             srcDir("src/proto")
         }
     }
+}
+
+extensions.configure<PublishingExtension> {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            artifact(tasks.jar.get()) {
+                classifier = null
+            }
+
+            pom {
+                name.set(project.name)
+                url.set("https://github.com/httpmarco/polocloud")
+                description.set("PoloCloud is the simplest and easiest Cloud for Minecraft")
+                licenses {
+                    license {
+                        name.set("Apache License")
+                        url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                    }
+                }
+                developers {
+                    developer {
+                        name.set("Mirco Lindenau")
+                        email.set("mirco.lindenau@gmx.de")
+                    }
+                }
+
+                scm {
+                    url.set("https://github.com/httpmarco/polocloud")
+                    connection.set("https://github.com/httpmarco/polocloud.git")
+                }
+            }
+        }
+    }
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/releases/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+
+            username.set(System.getenv("ossrhUsername") ?: "")
+            password.set(System.getenv("ossrhPassword") ?: "")
+        }
+    }
+    useStaging.set(!project.rootProject.version.toString().endsWith("-SNAPSHOT"))
 }

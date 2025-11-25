@@ -5,7 +5,7 @@ package dev.httpmarco.polocloud.v1.proto;
 option java_package = "dev.httpmarco.polocloud.v1.platform";
 option java_multiple_files = true;
 
-import "polocloud/v1/proto/object_utils.proto";
+import "v1/object_utils.proto";
 
 service PlatformController {
   rpc find(PlatformFindRequest) returns (PlatformFindResponse);
