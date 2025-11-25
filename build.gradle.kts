@@ -4,6 +4,8 @@ plugins {
     id("java-library")
     id("com.google.protobuf") version "0.9.5"
     id("com.gradleup.shadow") version "9.2.0"
+    alias(libs.plugins.nexus.publish)
+
     `maven-publish`
 }
 
@@ -121,4 +123,18 @@ publishing {
             }
         }
     }
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/releases/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+
+            username.set(System.getenv("ossrhUsername") ?: "")
+            password.set(System.getenv("ossrhPassword") ?: "")
+        }
+    }
+    // todo find a better way to determine if we are in a staging or release build
+    useStaging.set(!project.rootProject.version.toString().endsWith("-SNAPSHOT"))
 }
