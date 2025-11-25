@@ -4,13 +4,11 @@ plugins {
     id("java-library")
     id("com.google.protobuf") version "0.9.5"
     id("com.gradleup.shadow") version "9.0.0"
-
-    alias(libs.plugins.nexus.publish)
     `maven-publish`
 }
 
 group = "dev.httpmarco.polocloud"
-version = "3.0.0-pre.8-SNAPSHOT"
+version = "3.0.0-pre.7.1-SNAPSHOT"
 
 
 val grpcVersion = "1.77.0"
@@ -39,7 +37,6 @@ tasks.withType<JavaCompile>().configureEach {
 
 protobuf {
     protoc {
-        // dont update this version
         artifact = "com.google.protobuf:protoc:$protobufVersion"
     }
     plugins {
@@ -54,11 +51,6 @@ protobuf {
             }
         }
     }
-}
-
-tasks.jar {
-    dependsOn(tasks.shadowJar)
-    enabled = false
 }
 
 tasks.shadowJar {
