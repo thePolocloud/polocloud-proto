@@ -96,16 +96,16 @@ sourceSets {
     }
 }
 
-extensions.configure<PublishingExtension> {
+publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            artifact(tasks.jar.get()) {
+            artifact(tasks.shadowJar.get()) {
                 classifier = null
             }
 
             pom {
                 name.set(project.name)
-                url.set("https://github.com/httpmarco/polocloud")
+                url.set("https://github.com/thePolocloud/polocloud")
                 description.set("PoloCloud is the simplest and easiest Cloud for Minecraft")
                 licenses {
                     license {
@@ -119,25 +119,11 @@ extensions.configure<PublishingExtension> {
                         email.set("mirco.lindenau@gmx.de")
                     }
                 }
-
                 scm {
-                    url.set("https://github.com/httpmarco/polocloud")
+                    url.set("https://github.com/thePolocloud/polocloud")
                     connection.set("https://github.com/httpmarco/polocloud.git")
                 }
             }
         }
     }
-}
-
-nexusPublishing {
-    repositories {
-        sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/releases/"))
-            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
-
-            username.set(System.getenv("ossrhUsername") ?: "")
-            password.set(System.getenv("ossrhPassword") ?: "")
-        }
-    }
-    useStaging.set(!project.rootProject.version.toString().endsWith("-SNAPSHOT"))
 }
