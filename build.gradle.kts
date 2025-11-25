@@ -14,18 +14,20 @@ version = "3.0.0-pre.7-SNAPSHOT"
 
 
 val grpcVersion = "1.77.0"
-val protobufVersion = "4.28.0"
+val protobufVersion = "4.33.1"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    api("com.google.protobuf:protobuf-java:${protobufVersion}")
+    api("com.google.protobuf:protobuf-java-util:${protobufVersion}")
     api("io.grpc:grpc-netty:${grpcVersion}")
     api("io.grpc:grpc-stub:${grpcVersion}")
     api("io.grpc:grpc-protobuf:${grpcVersion}")
 
-    implementation("javax.annotation:javax.annotation-api:1.3.2")
+    compileOnly("javax.annotation:javax.annotation-api:1.3.2")
 }
 
 tasks.withType<JavaCompile>().configureEach {
@@ -37,11 +39,11 @@ tasks.withType<JavaCompile>().configureEach {
 protobuf {
     protoc {
         // dont update this version
-        artifact = "com.google.protobuf:protoc:3.25.8"
+        artifact = "com.google.protobuf:protoc:$protobufVersion"
     }
     plugins {
         id("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.77.0"
+            artifact = "io.grpc:protoc-gen-grpc-java:$grpcVersion"
         }
     }
     generateProtoTasks {
@@ -64,6 +66,14 @@ tasks.shadowJar {
 
 artifacts {
     archives(tasks.shadowJar)
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+
+    withSourcesJar()
 }
 
 tasks {
