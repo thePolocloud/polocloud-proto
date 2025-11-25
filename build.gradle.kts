@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "dev.httpmarco.polocloud"
-version = "3.0.0-pre.7.1-SNAPSHOT"
+version = "3.0.0-pre.7-SNAPSHOT"
 
 
 val grpcVersion = "1.77.0"
@@ -92,9 +92,9 @@ sourceSets {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            artifact(tasks.shadowJar.get()) {
-                classifier = null
-            }
+
+            // nur die Shadow Jar veröffentlichen
+            artifact(tasks.shadowJar.get())
 
             pom {
                 name.set(project.name)
@@ -119,4 +119,8 @@ publishing {
             }
         }
     }
+}
+
+tasks.publish {
+    dependsOn(tasks.shadowJar)
 }
