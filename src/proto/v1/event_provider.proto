@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package dev.httpmarco.polocloud.v1.proto;
+
+service EventProvider {
+
+  rpc Subscribe (EventSubscribeRequest) returns (stream EventContext);
+
+  rpc Call (EventContext) returns (CallEventResponse);
+  rpc Unsubscribe(EventSubscribeRequest) returns (UnsubscribeResponse);
+}
+
+message EventSubscribeRequest {
+  string event_name = 1;
+  string service_name = 2;
+}
+
+message EventContext {
+  string event_name = 1;
+  string event_data = 2;
+}
+
+message CallEventResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message UnsubscribeResponse {
+  bool success = 1;
+}
