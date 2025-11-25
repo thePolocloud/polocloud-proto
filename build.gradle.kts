@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "dev.httpmarco.polocloud"
-version = "3.0.0-pre.7.1-SNAPSHOT"
+version = "3.0.0-pre.7-SNAPSHOT"
 
 val grpcVersion = "1.77.0"
 val protobufVersion = "4.33.1"
@@ -75,6 +75,8 @@ protobuf {
 }
 
 tasks.shadowJar {
+    relocate("com.google.protobuf", "dev.httpmarco.polocloud.sdk.java.relocated.protobuf")
+
     archiveBaseName.set("polocloud-proto")
     archiveClassifier.set("")
     mergeServiceFiles()
