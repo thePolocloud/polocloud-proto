@@ -7,7 +7,6 @@ option java_multiple_files = true;
 
 import "v1/template_provider.proto";
 
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 
 service GroupController {
@@ -26,7 +25,7 @@ message GroupSnapshot {
   int32 min_online = 6;
   int32 max_online = 7;
   double start_threshold = 8;
-  google.protobuf.Timestamp created_at = 9;
+  int64 created_at = 9;
   repeated TemplateSnapshot templates = 10;
   map<string, string> properties = 11;
 }
@@ -49,7 +48,7 @@ message GroupDeleteRequest {
 }
 
 message GroupInformationSnapshot {
-  google.protobuf.Timestamp created_at = 1;
+  int64 created_at = 1;
 }
 
 message GroupPlatformSnapshot {
