@@ -1,0 +1,2 @@
+# .proto Dateien als Protocol Buffer zählen
+*.proto linguist-language=Protocol\ Buffer
