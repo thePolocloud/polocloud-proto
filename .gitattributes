@@ -1,2 +1,3 @@
-# .proto Dateien als Protocol Buffer zählen
-*.proto linguist-language=Protocol\ Buffer
+# .proto-Dateien als Protocol Buffers erkennen
+*.proto linguist-language=Protocol\ Buffers
+*.proto linguist-detectable=true
