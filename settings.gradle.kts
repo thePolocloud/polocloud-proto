@@ -1,4 +1,4 @@
-rootProject.name = "polocloud-proto"
+rootProject.name = "proto"
 
 pluginManagement {
     repositories {

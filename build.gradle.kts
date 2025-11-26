@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "dev.httpmarco.polocloud"
-version = "3.0.0-pre.7.3-SNAPSHOT"
+version = "3.0.0-pre.8-SNAPSHOT"
 
 val grpcVersion = "1.77.0"
 val protobufVersion = "4.33.1"
@@ -48,8 +48,8 @@ sourceSets {
         }
 
         java {
-            srcDir("${project.layout.buildDirectory}/generated/source/proto/main/java")
-            srcDir("${project.layout.buildDirectory}/generated/source/proto/main/grpc")
+            srcDir("${buildDir}/generated/source/proto/main/java")
+            srcDir("${buildDir}/generated/source/proto/main/grpc")
         }
     }
 }
