@@ -7,6 +7,6 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.httpmarco.polocloud:proto:3.0.0-pre.7-SNAPSHOT")
+    implementation("dev.httpmarco.polocloud:proto:3.0.0-pre.8-SNAPSHOT")
 }
 ```
