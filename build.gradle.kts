@@ -48,8 +48,8 @@ sourceSets {
         }
 
         java {
-            srcDir("$buildDir/generated/source/proto/main/java")
-            srcDir("$buildDir/generated/source/proto/main/grpc")
+            srcDir("${project.layout.buildDirectory}/generated/source/proto/main/java")
+            srcDir("${project.layout.buildDirectory}/generated/source/proto/main/grpc")
         }
     }
 }
