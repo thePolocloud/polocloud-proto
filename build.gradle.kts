@@ -13,7 +13,7 @@ group = "dev.httpmarco.polocloud"
 version = "3.0.0-pre.8-SNAPSHOT"
 
 val grpcVersion = "1.77.0"
-val protobufVersion = "4.33.1"
+val protobufVersion = "3.25.8"
 
 repositories {
     mavenCentral()
@@ -26,6 +26,7 @@ dependencies {
 
     // Compile only annotation API
     compileOnly("javax.annotation:javax.annotation-api:1.3.2")
+
 }
 
 java {
