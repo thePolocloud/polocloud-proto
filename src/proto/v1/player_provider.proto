@@ -11,6 +11,7 @@ option java_multiple_files = true;
 service PlayerController {
   rpc findAll (google.protobuf.Empty) returns (PlayerFindResponse);
   rpc findByName (PlayerFindByNameRequest) returns (PlayerFindResponse);
+  rpc findByUniqueID (PlayerFindByUniqueIdRequest) returns (PlayerFindResponse);
   rpc findByService (PlayerFindByServiceRequest) returns (PlayerFindResponse);
   rpc playerCount(google.protobuf.Empty) returns (PlayerCountResponse);
   rpc messagePlayer(PlayerMessageActorRequest) returns (PlayerActorResponse);
@@ -21,6 +22,10 @@ service PlayerController {
 
 message PlayerFindByNameRequest {
   string name = 1;
+}
+
+message PlayerFindByUniqueIdRequest {
+  string uniqueId = 1;
 }
 
 message PlayerFindByServiceRequest {
