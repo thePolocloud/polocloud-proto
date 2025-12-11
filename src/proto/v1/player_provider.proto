@@ -3,6 +3,7 @@ syntax = "proto3";
 package dev.httpmarco.polocloud.v1.proto;
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
 
 option java_package = "dev.httpmarco.polocloud.v1.player";
 option java_multiple_files = true;
@@ -15,6 +16,7 @@ service PlayerController {
   rpc messagePlayer(PlayerMessageActorRequest) returns (PlayerActorResponse);
   rpc kickPlayer(PlayerMessageActorRequest) returns (PlayerActorResponse);
   rpc connectPlayer(PlayerConnectActorRequest) returns (PlayerActorResponse);
+  rpc actorStreaming (google.protobuf.Empty) returns (stream google.protobuf.Any);
 }
 
 message PlayerFindByNameRequest {
@@ -55,3 +57,4 @@ message PlayerActorResponse {
   bool success = 1;
   string error_message = 2;
 }
+
