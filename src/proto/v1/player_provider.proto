@@ -35,7 +35,7 @@ message PlayerFindByServiceRequest {
 message PlayerSnapshot {
   string unique_id = 1;
   string name = 2;
-  string current_service_name = 3;
+  string current_server_name = 3;
   string current_proxy_name = 4;
   int64 first_time_joined = 5;
 }
