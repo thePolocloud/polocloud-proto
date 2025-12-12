@@ -17,7 +17,7 @@ service PlayerController {
   rpc messagePlayer(PlayerMessageActorRequest) returns (PlayerActorResponse);
   rpc kickPlayer(PlayerMessageActorRequest) returns (PlayerActorResponse);
   rpc connectPlayer(PlayerConnectActorRequest) returns (PlayerActorResponse);
-  rpc actorStreaming (PlayerActorIdentifier) returns (stream google.protobuf.Any);
+  rpc actorStreaming (PlayerActorIdentifier) returns (stream StreamingAlert);
 }
 
 message PlayerFindByNameRequest {
@@ -65,5 +65,10 @@ message PlayerActorIdentifier {
 message PlayerActorResponse {
   bool success = 1;
   string error_message = 2;
+}
+
+message StreamingAlert {
+  string className = 1;
+  google.protobuf.Any actor = 2;
 }
 
