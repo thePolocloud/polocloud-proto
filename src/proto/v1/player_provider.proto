@@ -15,7 +15,7 @@ service PlayerController {
   rpc findByService (PlayerFindByServiceRequest) returns (PlayerFindResponse);
   rpc playerCount(google.protobuf.Empty) returns (PlayerCountResponse);
   rpc messagePlayer(PlayerMessageActorRequest) returns (PlayerActorResponse);
-  rpc kickPlayer(PlayerMessageActorRequest) returns (PlayerActorResponse);
+  rpc kickPlayer(PlayerKickActorRequest) returns (PlayerActorResponse);
   rpc connectPlayer(PlayerConnectActorRequest) returns (PlayerActorResponse);
   rpc actorStreaming (PlayerActorIdentifier) returns (stream google.protobuf.Any);
 }
@@ -51,6 +51,11 @@ message PlayerCountResponse {
 message PlayerMessageActorRequest {
   string unique_id = 1;
   string message = 2;
+}
+
+message PlayerKickActorRequest {
+  string unique_id = 1;
+  string reason = 2;
 }
 
 message PlayerConnectActorRequest {
