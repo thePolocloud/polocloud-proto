@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "dev.httpmarco.polocloud"
-version = "3.0.0-pre.7.1-SNAPSHOT"
+version = "3.0.0-pre.8-SNAPSHOT"
 
 val grpcVersion = "1.77.0"
 val protobufVersion = "3.25.8"
